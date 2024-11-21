@@ -1,0 +1,127 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .signup-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f4f7fc;
+        }
+
+        .signup-form {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin: 10px;
+        }
+
+        .signup-form h2 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .signup-form p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .signup-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #000000;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+
+        .signup-form input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            background-color: #fff;
+        }
+
+        .signup-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .signup-form button:hover {
+            background-color: #45a049;
+        }
+
+        .signup-form a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-form a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .signup-form {
+                padding: 30px;
+                width: 90%;
+            }
+
+            .signup-form h2 {
+                font-size: 24px;
+            }
+
+            .signup-form input,
+            .signup-form button {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .signup-form h2 {
+                font-size: 22px;
+            }
+
+            .signup-form input,
+            .signup-form button {
+                padding: 8px;
+                font-size: 12px;
+            }
+        }
+    </style>
+
+    <div class="signup-container">
+        <div class="signup-form">
+            <h2>Sign Up</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="submit-btn">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="/login/">Login here</a></p>
+        </div>
+    </div>
+{% endblock %}

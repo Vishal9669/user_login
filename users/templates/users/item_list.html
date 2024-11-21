@@ -1,0 +1,196 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Your Items{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .item-details {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            width: 80%;
+            max-width: 800px;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .item-description {
+            font-size: 16px;
+            color: #555;
+            margin-top: 10px;
+            max-width: 400px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;      
+        }
+
+
+        .items-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .items-container h2 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .items-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .items-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-title {
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+        }
+
+
+        .item-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin-right: 20px;
+            border-radius: 8px;
+        }
+
+        .item-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            text-align: center;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .edit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        .edit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+
+        .delete-btn:hover {
+            background-color: #e53935;
+        }
+
+        .no-items {
+            text-align: center;
+            font-size: 18px;
+            color: #888;
+        }
+
+        .create-btn {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .create-btn:hover {
+            background-color: #45a049;
+        }
+
+        @media (max-width: 768px) {
+            .items-container {
+                padding: 15px;
+            }
+
+            .items-list li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .item-image {
+                width: 100px;
+                height: 100px;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .create-btn {
+                width: 100%;
+                font-size: 14px;
+            }
+        }
+    </style>
+
+<div class="items-container">
+    <h2>Your Items</h2>
+    
+    {% if items %}
+        <ul class="items-list">
+            {% for item in items %}
+                <li>
+                    <div class="item-details">
+                        <img src="{{ item.image.url }}" alt="{{ item.title }}" class="item-image"><br>
+                        <div>
+                            <h3 class="item-title">{{ item.title }}</h3>
+                            <p class="item-description">{{ item.description }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="item-buttons">
+                        <a href="{% url 'item_edit' item.pk %}" class="edit-btn">Edit</a>
+                        <a href="{% url 'item_delete' item.pk %}" class="delete-btn">Delete</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-items">You don't have any items yet.</p>
+    {% endif %}
+    
+    <a href="{% url 'item_create' %}" class="create-btn">Create New Item</a>
+</div>
+
+{% endblock %}

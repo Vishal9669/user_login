@@ -1,0 +1,137 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Create Item{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .item-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f4f7fc;
+        }
+
+        .item-form {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin: 10px;
+        }
+
+        .item-form h2 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .item-form p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .item-form input,
+        .item-form textarea,
+        .item-form select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #000000;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+
+        .item-form input:focus,
+        .item-form textarea:focus,
+        .item-form select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            background-color: #fff;
+        }
+
+        .item-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .item-form button:hover {
+            background-color: #45a049;
+        }
+
+        .item-form a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .item-form a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .item-form {
+                padding: 30px;
+                width: 90%;
+            }
+
+            .item-form h2 {
+                font-size: 24px;
+            }
+
+            .item-form input,
+            .item-form textarea,
+            .item-form select,
+            .item-form button {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .item-form h2 {
+                font-size: 22px;
+            }
+
+            .item-form input,
+            .item-form textarea,
+            .item-form select,
+            .item-form button {
+                padding: 8px;
+                font-size: 12px;
+            }
+        }
+    </style>
+
+    <div class="item-container">
+        <div class="item-form">
+            <h2>Create New Item</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="submit-btn">Create Item</button>
+            </form><br>
+            <a href="{% url 'item_list' %}">
+                <button type="button" class="back-button">Back to Items</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}
